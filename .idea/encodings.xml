@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/service/LinkUnAvailService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/ExportXLS.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/ExportXLS.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/JSONUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/JSONUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/LinkUnAvailService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/LinkUnAvailService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/hbase-site.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/log4j.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/gengyun/utils/redisconf.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/hbase-site.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/log4j.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/redisconf.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/java/SpellCheckerClientTest.java" charset="UTF-8" />
+  </component>
+</project>
