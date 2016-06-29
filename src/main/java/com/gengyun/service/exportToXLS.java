@@ -6,6 +6,6 @@ package com.gengyun.service;
 public class exportToXLS {
     public static void main(String[] args) {
         LinkUnAvailService linkUnAvailService =new LinkUnAvailService();
-        linkUnAvailService.exportFromRedis("www.gygov.gov.cn");
+        linkUnAvailService.exportFromRedis("www.google.com");
     }
 }

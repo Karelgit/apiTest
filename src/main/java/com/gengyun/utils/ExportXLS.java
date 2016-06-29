@@ -14,26 +14,29 @@ import java.io.IOException;
  */
 public class ExportXLS {
     private static FileOutputStream fos;
+    private static WritableSheet sheet;
 
     public WritableWorkbook createExcel(String xlsName,WritableWorkbook workbook) {
 //        String path = "/home/hbase/excels/error_words_" + xlsName + ".xls";
-        String path = "C:\\Users\\Administrator\\Desktop\\yz-guizhou-spellcheck_0624\\apiTest\\data\\error_words_" + xlsName + ".xls";
+        String path = "/Users/macbookpro/IdeaProjects/apiTest/data/" + xlsName + ".xls";
         try {
             fos = new FileOutputStream(path);
             //创建工作薄
             workbook = Workbook.createWorkbook(fos);
+            //创建新的一页
+            sheet = workbook.createSheet("First Sheet", 0);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return workbook;
     }
 
-    public void addRecord(int index, String url, String error_words,  WritableWorkbook workbook) {
-        //创建新的一页
-        WritableSheet sheet = workbook.createSheet("First Sheet", 0);
-        //创建要显示的内容,创建一个单元格，第一个参数为列坐标，第二个参数为行坐标，第三个参数为内容
-        Label title_url = new Label(0, 0, "URL");
+    public void addRecord(int index, String url, String error_words) {
         try {
+            //创建要显示的内容,创建一个单元格，第一个参数为列坐标，第二个参数为行坐标，第三个参数为内容
+            Label title_url = new Label(0, 0, "URL");
             sheet.addCell(title_url);
             Label title_error_words = new Label(1, 0, "ERROR_WORDS");
             sheet.addCell(title_error_words);

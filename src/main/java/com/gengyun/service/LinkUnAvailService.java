@@ -3,7 +3,8 @@ package com.gengyun.service;
 import com.gengyun.utils.ExportXLS;
 import com.gengyun.utils.PropertyHelper;
 import com.gengyun.utils.ReadFile;
-import com.yeezhao.guizhou.client.SpellCheckerClient;
+//import com.yeezhao.guizhou.client.SpellCheckerClient;
+import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HConstants;
@@ -31,7 +32,7 @@ public class LinkUnAvailService {
     private PropertyHelper propertyHelper;
     private JedisPool jedisPool;
     private Configuration hbConfig;
-    private SpellCheckerClient client;
+//    private SpellCheckerClient client;
     private HTable table;
 
 
@@ -51,7 +52,7 @@ public class LinkUnAvailService {
         hbConfig = new Configuration();
         hbConfig.addResource("hbase-site.xml");
         hbConfig.setLong(HConstants.HBASE_REGIONSERVER_LEASE_PERIOD_KEY, 120000);
-        client = new SpellCheckerClient();
+//        client = new SpellCheckerClient();
         Jedis jedis = null;
         ResultScanner rs = null;
         try {
@@ -68,10 +69,10 @@ public class LinkUnAvailService {
             for (Result r : rs) {
                 String url = Bytes.toString(r.getValue(Bytes.toBytes("crawlerData"), Bytes.toBytes("url")));
                 String text = Bytes.toString(r.getValue(Bytes.toBytes("crawlerData"), Bytes.toBytes("text")));
-                String errorWords = client.query(text);
+                /*String errorWords = client.query(text);
                 if(errorWords !="") {
                     jedis.hset(tableName + "_errorwords", url, errorWords);
-                }
+                }*/
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +93,7 @@ public class LinkUnAvailService {
         workbook = exportXlS.createExcel(tableName,workbook);
         int i = 0;
         for (Map.Entry<String, String> entry : errorWordsMap.entrySet()) {
-            exportXlS.addRecord(i, entry.getKey(), entry.getValue(),workbook);
+            exportXlS.addRecord(i, entry.getKey(), entry.getValue());
             System.out.println("processing...");
             i++;
 
