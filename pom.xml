@@ -1,9 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.springapp</groupId>
+    <groupId>com.gengyun</groupId>
     <artifactId>apiTest</artifactId>
-    <packaging>war</packaging>
+    <!--<packaging>war</packaging>-->
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>apiTest</name>
 
@@ -52,7 +53,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- hbase api -->
+        <!-- hbase  -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-common</artifactId>
@@ -124,9 +125,9 @@
             <version>0.2.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-        <groupId>org.ansj</groupId>
-        <artifactId>ansj_seg</artifactId>
-        <version>2.0.6</version>
+            <groupId>org.ansj</groupId>
+            <artifactId>ansj_seg</artifactId>
+            <version>2.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.nlpcn</groupId>
@@ -165,7 +166,7 @@
         </dependency>
     </dependencies>
 
-    <build>
+    <!--<build>
         <finalName>apiTest</finalName>
         <resources>
             <resource>
@@ -203,6 +204,51 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <warSourceExcludes>src/test/**/**</warSourceExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>-->
+    <!--lib和jar分离打包-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib_apiTest_export/</classpathPrefix>
+                            <mainClass>com.gengyun.service.exportToXLS</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib_apiTest_export</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
