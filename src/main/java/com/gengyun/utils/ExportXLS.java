@@ -1,5 +1,6 @@
 package com.gengyun.utils;
 
+import jxl.CellView;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
@@ -35,6 +36,11 @@ public class ExportXLS {
 
     public void addRecord(int index, String url, String error_words) {
         try {
+            //设置字体为Arial，30号，加粗
+            CellView cellView = new CellView();
+            cellView.setAutosize(true);
+            sheet.setColumnView(0,cellView);
+            sheet.setColumnView(1,cellView);
             //创建要显示的内容,创建一个单元格，第一个参数为列坐标，第二个参数为行坐标，第三个参数为内容
             Label title_url = new Label(0, 0, "URL");
             sheet.addCell(title_url);
