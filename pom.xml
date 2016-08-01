@@ -69,13 +69,11 @@
             <artifactId>hadoop-core</artifactId>
             <version>1.2.1</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-common</artifactId>
             <version>0.98.4-hadoop2</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase-common</artifactId>
@@ -219,8 +217,8 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib_apiTest_export/</classpathPrefix>
-                            <mainClass>com.gengyun.service.exportToXLS</mainClass>
+                            <classpathPrefix>lib_apiTest/</classpathPrefix>
+                            <mainClass>com.gengyun.service.getDataByThread</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -237,7 +235,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/lib_apiTest_export</outputDirectory>
+                            <outputDirectory>${project.build.directory}/lib_apiTest</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>

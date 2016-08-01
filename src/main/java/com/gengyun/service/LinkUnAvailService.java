@@ -4,6 +4,7 @@ import com.gengyun.utils.ExportXLS;
 import com.gengyun.utils.PropertyHelper;
 import com.gengyun.utils.ReadFile;
 //import com.yeezhao.guizhou.client.SpellCheckerClient;
+import com.yeezhao.guizhou.client.SpellCheckerClient;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import org.apache.hadoop.conf.Configuration;
@@ -32,7 +33,7 @@ public class LinkUnAvailService {
     private PropertyHelper propertyHelper;
     private JedisPool jedisPool;
     private Configuration hbConfig;
-//    private SpellCheckerClient client;
+    private SpellCheckerClient client;
     private HTable table;
 
 
@@ -51,8 +52,8 @@ public class LinkUnAvailService {
         initRedis(tableName);
         hbConfig = new Configuration();
         hbConfig.addResource("hbase-site.xml");
-        hbConfig.setLong(HConstants.HBASE_REGIONSERVER_LEASE_PERIOD_KEY, 120000);
-//        client = new SpellCheckerClient();
+        hbConfig.setLong(HConstants.HBASE_REGIONSERVER_LEASE_PERIOD_KEY, 1800000);
+        client = new SpellCheckerClient();
         Jedis jedis = null;
         ResultScanner rs = null;
         try {
@@ -65,20 +66,24 @@ public class LinkUnAvailService {
             rs = table.getScanner(scan);
             jedis = jedisPool.getResource();
             jedis.select(9);
-
+            int i = 0;
             for (Result r : rs) {
                 String url = Bytes.toString(r.getValue(Bytes.toBytes("crawlerData"), Bytes.toBytes("url")));
                 String text = Bytes.toString(r.getValue(Bytes.toBytes("crawlerData"), Bytes.toBytes("text")));
-                /*String errorWords = client.query(text);
+                String errorWords = client.query(text);
                 if(errorWords !="") {
                     jedis.hset(tableName + "_errorwords", url, errorWords);
-                }*/
+                }
+                i++;
+                System.out.println("scanning the record " +i);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            hbConfig.clear();
         }
         System.out.println(tableName + " is formal ended!");
-        return "hbase to Redis is processed!";
+        return null;
     }
 
     public String exportFromRedis(String tableName) {
@@ -111,9 +116,7 @@ public class LinkUnAvailService {
     public static void main(String[] args) {
         /*System.out.println("tableName" + "_errorwords" +
                 new SimpleDateFormat("YYYYmmdd-HHmmss").format(new Date()));*/
-
         LinkedBlockingQueue<String> lbq = ReadFile.readByLine("C:\\Users\\Administrator\\Desktop\\yz-guizhou-spellcheck_0624\\apiTest\\data\\tables.txt");
-
     }
 
 

@@ -1,0 +1,6 @@
+部署机器：crawler-60(172.16.100.60)
+目录：/home/hbase
+把数据从hbase错别字扫描到redis脚本：sh run.sh <tableName>
+把redis的错别字信息导出脚本：sh run_export.sh <tableName>
+输出日志：/home/hbase/logs/
+输入错别字excel表：/home/hbase/excels/

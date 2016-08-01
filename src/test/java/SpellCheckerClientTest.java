@@ -1,5 +1,7 @@
 //import com.yeezhao.guizhou.client.SpellCheckerClient;
 
+import com.yeezhao.guizhou.client.SpellCheckerClient;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +19,6 @@ public class SpellCheckerClientTest {
         while(cin.hasNextLine()) {
             sb.append(cin.nextLine()).append(System.lineSeparator());
         }
-//        System.out.println(new SpellCheckerClient().query(sb.toString()));
+        System.out.println(new SpellCheckerClient().query(sb.toString()));
     }
 }
