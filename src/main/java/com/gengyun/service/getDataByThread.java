@@ -1,6 +1,12 @@
 package com.gengyun.service;
 
+import com.gengyun.utils.FileUtil;
+import org.apache.commons.cli.ParseException;
+import org.codehaus.jettison.json.JSONException;
+
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/6/29.
@@ -35,6 +41,24 @@ public class getDataByThread {
     public static void main(String[] args) {
         System.out.println("*************PID**************：  " +  ManagementFactory.getRuntimeMXBean().getName().split("@")[0]);
         LinkUnAvailService linkUnAvailService =new LinkUnAvailService();
-        linkUnAvailService.hbaseToRedis(args[0]);
+//        linkUnAvailService.hbaseToRedis(args[0]);
+
+        String wholeSiteURI = "http://222.85.149.3:18910/getData.json";
+        List<String> taskidList = null;
+        try {
+            taskidList = FileUtil.readFile("/home/hbase/taskid.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(int i=0;i<taskidList.size();i++)    {
+            try {
+                linkUnAvailService.getHbaseDateByTid(taskidList.get(i),wholeSiteURI);
+                System.out.println("***************nomal ending!******************");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

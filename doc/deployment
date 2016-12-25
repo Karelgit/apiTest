@@ -1,6 +1,9 @@
 部署机器：crawler-60(172.16.100.60)
 目录：/home/hbase
+参数说明:<tableName>  指Hbase表名称
 把数据从hbase错别字扫描到redis脚本：sh run.sh <tableName>
 把redis的错别字信息导出脚本：sh run_export.sh <tableName>
 输出日志：/home/hbase/logs/
 输入错别字excel表：/home/hbase/excels/
+
+run_Qdn.sh可以扫描通过taskid.txt里面的taskId（可多个）去扫描Nutch爬虫平台的错别字,这里的run_Qdn.sh只是以前为了黔东南跑的错别字扫描，贵阳，黔西南的同样适用，无影响
